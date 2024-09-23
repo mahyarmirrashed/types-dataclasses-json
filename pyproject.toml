@@ -29,6 +29,13 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.6"
 
+[tool.poetry.group.dev.dependencies]
+dataclasses = { version = "^0.8", python = "3.6" }
+dataclasses-json = "0.5.9"
+marshmallow = "^3.3.0"
+marshmallow-enum = "^1.5.1"
+typing-inspect = "^0.4.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
