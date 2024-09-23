@@ -5,6 +5,7 @@ description = "Type stubs for dataclasses-json"
 authors = ["Mahyar Mirrashed <mahyar+pypi@mirrashed.com>"]
 license = "MIT"
 readme = "README.md"
+repository = "https://github.com/mahyarmirrashed/types-dataclasses-json"
 
 [tool.poetry.dependencies]
 python = "^3.6"
