@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "types-dataclasses-json"
+version = "0.5.9"
+description = "Type stubs for dataclasses-json"
+authors = ["Mahyar Mirrashed <mahyar+pypi@mirrashed.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
