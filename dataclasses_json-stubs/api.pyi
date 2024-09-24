@@ -1,5 +1,5 @@
 import abc
-from typing import Any, Callable, Dict, Optional, Tuple, Type, TypeVar, Union, overload
+from typing import Any, Callable, TypeVar, overload
 
 from dataclasses_json.cfg import LetterCase
 from dataclasses_json.core import Json
@@ -11,7 +11,7 @@ T = TypeVar("T")
 U = TypeVar("U", bound="DataClassJsonMixin")
 
 class DataClassJsonMixin(abc.ABC):
-    dataclass_json_config: Optional[Dict[str, Any]]
+    dataclass_json_config: dict[str, Any] | None
     def to_json(
         self,
         *,
@@ -19,52 +19,52 @@ class DataClassJsonMixin(abc.ABC):
         ensure_ascii: bool = True,
         check_circular: bool = True,
         allow_nan: bool = True,
-        indent: Optional[Union[int, str]] = None,
-        separators: Optional[Tuple[str, str]] = None,
-        default: Optional[Callable[[Any], Any]] = None,
+        indent: int | str | None = None,
+        separators: tuple[str, str] | None = None,
+        default: Callable[[Any], Any] | None = None,
         sort_keys: bool = False,
-        **kwargs: Dict[str, Any]
+        **kwargs: dict[str, Any]
     ) -> str: ...
     @classmethod
     def from_json(
-        cls: Type[U],
+        cls: type[U],
         s: JsonInput,
         *,
-        parse_float: Optional[Callable[[str], Any]] = None,
-        parse_int: Optional[Callable[[str], Any]] = None,
-        parse_constant: Optional[Callable[[str], Any]] = None,
+        parse_float: Callable[[str], Any] | None = None,
+        parse_int: Callable[[str], Any] | None = None,
+        parse_constant: Callable[[str], Any] | None = None,
         infer_missing: bool = False,
-        **kwargs: Dict[str, Any]
+        **kwargs: dict[str, Any]
     ) -> U: ...
     @classmethod
-    def from_dict(cls: Type[U], kvs: Json, *, infer_missing: bool = False) -> U: ...
-    def to_dict(self, encode_json: bool = False) -> Dict[str, Json]: ...
+    def from_dict(cls: type[U], kvs: Json, *, infer_missing: bool = False) -> U: ...
+    def to_dict(self, encode_json: bool = False) -> dict[str, Json]: ...
     @classmethod
     def schema(
-        cls: Type[U],
+        cls: type[U],
         *,
         infer_missing: bool = False,
-        only: Optional[types.StrSequenceOrSet] = None,
+        only: types.StrSequenceOrSet | None = None,
         exclude: types.StrSequenceOrSet = (),
         many: bool = False,
-        context: Optional[Dict[str, Any]] = None,
+        context: dict[str, Any] | None = None,
         load_only: types.StrSequenceOrSet = (),
         dump_only: types.StrSequenceOrSet = (),
         partial: bool = False,
-        unknown: Optional[str] = None
+        unknown: str | None = None
     ) -> "SchemaType[U]": ...
 
 @overload
-def dataclass_json(_cls: Type[T]) -> Type[T]: ...
+def dataclass_json(_cls: type[T]) -> type[T]: ...
 @overload
 def dataclass_json(
     *,
-    letter_case: Optional[Union[Callable[[str], str], LetterCase]] = ...,
-    undefined: Optional[Union[str, Undefined]] = ...
-) -> Callable[[Type[T]], Type[T]]: ...
+    letter_case: Callable[[str], str] | LetterCase | None = ...,
+    undefined: str | Undefined | None = ...
+) -> Callable[[type[T]], type[T]]: ...
 def dataclass_json(
-    _cls: Optional[Type[T]] = None,
+    _cls: type[T] | None = None,
     *,
-    letter_case: Optional[Union[Callable[[str], str], LetterCase]] = None,
-    undefined: Optional[Union[str, Undefined]] = None
-) -> Union[Callable[[Type[T]], Type[T]], Type[T]]: ...
+    letter_case: Callable[[str], str] | LetterCase | None = None,
+    undefined: str | Undefined | None = None
+) -> Callable[[type[T]], type[T]] | type[T]: ...

@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any, Callable, Dict, Optional, TypeVar, Union
+from typing import Any, Callable, TypeVar
 
 from dataclasses_json.undefined import Undefined
 from marshmallow.fields import Field
@@ -22,13 +22,13 @@ class LetterCase(Enum):
     PASCAL: Callable[[str], str]
 
 def config(
-    metadata: Optional[Dict[str, Any]] = None,
+    metadata: dict[str, Any] | None = None,
     *,
-    encoder: Optional[Callable[[U], str]] = None,
-    decoder: Optional[Callable[[str], U]] = None,
-    mm_field: Optional[Field] = None,
-    letter_case: Optional[Union[Callable[[str], str], LetterCase]] = None,
-    undefined: Optional[Union[str, Undefined]] = None,
-    field_name: Optional[str] = None,
-    exclude: Optional[Union[Callable[[str, T], bool], Exclude]] = None,
-) -> Dict[str, Any]: ...
+    encoder: Callable[[U], str] | None = None,
+    decoder: Callable[[str], U] | None = None,
+    mm_field: Field | None = None,
+    letter_case: Callable[[str], str] | LetterCase | None = None,
+    undefined: str | Undefined | None = None,
+    field_name: str | None = None,
+    exclude: Callable[[str, T], bool] | Exclude | None = None,
+) -> dict[str, Any]: ...

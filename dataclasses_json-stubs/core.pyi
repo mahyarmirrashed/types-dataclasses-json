@@ -1,5 +1,3 @@
-from typing import Dict, List, Union
+Json = dict[str, "Json"] | list["Json"] | str | int | float | bool | None
 
-Json = Union[Dict[str, "Json"], List["Json"], str, int, float, bool, None]
-
-def _asdict(obj: object, encode_json: bool = False) -> Dict[str, Json]: ...
+def _asdict(obj: object, encode_json: bool = False) -> dict[str, Json]: ...
